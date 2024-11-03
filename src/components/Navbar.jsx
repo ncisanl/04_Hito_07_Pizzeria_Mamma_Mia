@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useCart } from "../context/CartContext.jsx";
 
 export function Navbar() {
@@ -9,43 +9,43 @@ export function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+        <NavLink className="navbar-brand" to="/">
           Pizzería Mamma Mía!
-        </Link>
+        </NavLink>
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link active" aria-current="page" to="/">
+              <NavLink className="nav-link" aria-current="page" to="/">
                 🍕 Home
-              </Link>
+              </NavLink>
             </li>
             <li className="nav-item">
               {token ? (
-                <Link className="nav-link" to="/profile">
+                <NavLink className="nav-link" to="/profile">
                   🔓 Profile
-                </Link>
+                </NavLink>
               ) : (
-                <Link className="nav-link" to="/login">
+                <NavLink className="nav-link" to="/login">
                   🔐 Login
-                </Link>
+                </NavLink>
               )}
             </li>
             <li className="nav-item">
               {token ? (
-                <Link className="nav-link" to="/logout">
+                <NavLink className="nav-link" to="/logout">
                   🔒 Logout
-                </Link>
+                </NavLink>
               ) : (
-                <Link className="nav-link" to="/register">
+                <NavLink className="nav-link" to="/register">
                   🔐 Register
-                </Link>
+                </NavLink>
               )}
             </li>
           </ul>
         </div>
-        <Link className="nav-link total-navbar" to="/cart">
+        <NavLink className="nav-link total-navbar" to="/cart">
           🛒 Total: ${totalCart.toLocaleString("es-CL")}
-        </Link>
+        </NavLink>
       </div>
     </nav>
   );

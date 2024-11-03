@@ -1,7 +1,19 @@
-import { usePizzas } from "../context/PizzasContext.jsx";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export function Pizza() {
-  const { pizza } = usePizzas();
+  const { idPizza } = useParams();
+  const [pizza, setPizza] = useState([]);
+
+  const getPizza = async () => {
+    const resPizza = await fetch(`http://localhost:5000/api/pizzas/${idPizza}`);
+    const pizzaResponse = await resPizza.json();
+    setPizza(pizzaResponse);
+  };
+
+  useEffect(() => {
+    getPizza();
+  }, []);
 
   const mapIngredients = pizza?.ingredients?.map((ingredient, index) => {
     const isLast = index === pizza.ingredients.length - 1;

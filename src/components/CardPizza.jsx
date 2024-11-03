@@ -1,8 +1,16 @@
 import PropTypes from "prop-types";
 import { useCart } from "../context/CartContext.jsx";
+import { useNavigate } from "react-router-dom";
 
 export function CardPizza({ pizzaInfo, cartButton }) {
   const { addToCart, deleteToCart } = useCart();
+
+  const navigate = useNavigate();
+
+  const navigatePizza = () => {
+    navigate(`/pizza/${pizzaInfo.id}`);
+  };
+
   const mapIngredients = pizzaInfo.ingredients.map((ingredient, index) => {
     const isLast = index === pizzaInfo.ingredients.length - 1;
     return (
@@ -39,6 +47,8 @@ export function CardPizza({ pizzaInfo, cartButton }) {
               onClick={() => {
                 if (cartButton) {
                   deleteToCart(pizzaInfo);
+                } else {
+                  navigatePizza();
                 }
               }}
               type="button"
