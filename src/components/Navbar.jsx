@@ -1,11 +1,12 @@
 import { NavLink } from "react-router-dom";
 import { useCart } from "../context/CartContext.jsx";
+import { useUser } from "../context/UserContext.jsx";
 
 export function Navbar() {
   const { totalCart } = useCart();
   // TODO: token = true --> Profile / Logout
   // TODO: token = false --> Login / Register
-  const token = false;
+  const { token, logout } = useUser();
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container-fluid">
@@ -32,9 +33,9 @@ export function Navbar() {
             </li>
             <li className="nav-item">
               {token ? (
-                <NavLink className="nav-link" to="/logout">
+                <button className="nav-link" onClick={() => logout()}>
                   🔒 Logout
-                </NavLink>
+                </button>
               ) : (
                 <NavLink className="nav-link" to="/register">
                   🔐 Register
